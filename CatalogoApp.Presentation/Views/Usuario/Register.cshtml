@@ -1,0 +1,53 @@
+﻿@model CatalogoApp.Domain.Models.Usuario
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-4">Join the <span class="text-purple-light">Game</span></h1>
+    <p class="text-muted">Create your account to save favorites and leave reviews.</p>
+</div>
+
+<div class="card-gamer p-4 mx-auto shadow" style="max-width: 450px; border-top: 3px solid #0ce39a;">
+    <form asp-action="Register" method="post">
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger bg-danger text-white border-0 mb-3 small">
+                 @ViewBag.Error
+            </div>
+        }
+
+        <div class="mb-3">
+            <label asp-for="NombreUsuario" class="form-label-gamer">Nickname (ID Gamer)</label>
+            <input asp-for="NombreUsuario" class="form-control form-control-gamer" required placeholder="Ej: PlayerOne_2026" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Correo" class="form-label-gamer">E-mail</label>
+            <input asp-for="Correo" type="email" class="form-control form-control-gamer" required placeholder="gamer@ejemplo.com" />
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Contrasena" class="form-label-gamer">Password</label>
+                <input asp-for="Contrasena" type="password" class="form-control form-control-gamer" required />
+            </div>
+            <div class="col-md-6 mb-4">
+                <label class="form-label-gamer">Confirm Password</label>
+                <input type="password" name="Confirm Password" class="form-control form-control-gamer" required />
+            </div>
+        </div>
+
+        <button type="submit" class="btn-gamer w-100 mb-3">
+            Create Account
+        </button>
+
+        <div class="text-center">
+            <p class="small mb-0">
+                Already have an account? <br />
+                <a asp-action="Login" class="text-purple-light fw-bold">Return to Login</a>
+            </p>
+        </div>
+    </form>
+</div>
