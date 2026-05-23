@@ -1,11 +1,20 @@
 ﻿@model CatalogoApp.Domain.Models.Item
 
-<h1>@Model.Titulo</h1>
+<div class="card-gamer shadow-sm p-4 mx-auto mt-4" style="max-width:600px;">
+    <h2 class="mb-4 text-center">@Model.Titulo</h2>
 
-<p><strong>Género:</strong> @Model.Genero</p>
-<p><strong>Consola:</strong> @Model.Consola</p>
-<p><strong>Año:</strong> @Model.Ano</p>
-<p><strong>Descripción:</strong> @Model.Descripcion</p>
+    <p><strong>Género:</strong> <span class="text-purple-light">@Model.Genero</span></p>
+    <p><strong>Consola:</strong> <span class="text-purple-light">@Model.Consola</span></p>
+    <p><strong>Año:</strong> <span class="text-purple-light">@Model.Ano</span></p>
+    
+    <div class="mt-4 mb-4">
+        <h5 class="form-label-gamer">Descripción:</h5>
+        <p>@Model.Descripcion</p>
+    </div>
 
-<hr />
-<a asp-action="Index">&larr; Volver al catálogo</a>
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn-gamer">
+            ← Volver al catálogo
+        </a>
+    </div>
+</div>

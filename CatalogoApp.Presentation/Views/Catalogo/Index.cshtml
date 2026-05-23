@@ -1,29 +1,49 @@
 ﻿@model List<CatalogoApp.Domain.Models.Item>
 
-<h1>Catálogo de Videojuegos</h1>
+<div class="text-center mb-4">
+    <h1>Catálogo de Videojuegos</h1>
+</div>
 
-<!-- Filtro por Genero -->
-<div>
-    <a asp-action="Index">Todos</a>
-    @foreach (var gen in ViewBag.Generos as List<string>)
+<div class="text-center mb-4">
+    <a asp-action="Index" class="btn-gamer btn-sm mx-1 mb-2">Todos</a>
+    @if (ViewBag.Generos != null)
     {
-        <span> | </span>
-        <a asp-action="Index" asp-route-genero="@gen">@gen</a>
+        foreach (var gen in ViewBag.Generos as List<string>)
+        {
+            <a asp-action="Index" asp-route-genero="@gen" class="btn-gamer btn-sm mx-1 mb-2">@gen</a>
+        }
     }
 </div>
 
-<hr />
+<div class="text-center">
+    <hr style="border-color: #5e35b1; width: 60%; margin: 0 auto 2rem auto;" />
+</div>
 
-<!-- Lista de Items -->
-<ul>
+<div class="row">
     @foreach (var item in Model)
     {
-        <li>
-            <a asp-action="Detalle" asp-route-id="@item.Id">@item.Titulo</a>
-            &mdash; @item.Genero &diams; @item.Ano
-        </li>
-    }
-</ul>
+        <div class="col-md-4 mb-4">
+            <div class="card-gamer h-100 p-3">
+                <div class="card-body text-center d-flex flex-column">
+                    <h4 class="card-title">@item.Titulo</h4>
+                    <h6 class="card-subtitle mb-3 text-purple-light">@item.Genero</h6>
 
-<hr />
-<a asp-action="Agregar">+ Agregar videojuego</a>
+                    <p class="card-text mb-1">Consola: <strong>@item.Consola</strong></p>
+                    <p class="card-text mb-3">Lanzamiento: <strong>@item.Ano</strong></p>
+
+
+                    <div class="mt-auto">
+                        <a asp-action="Detalle" asp-route-id="@item.Id" class="btn-gamer btn-sm w-100">
+                            Ver Detalle
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="text-center mt-5 mb-5">
+    <a asp-action="Agregar" class="btn-gamer">+ Agregar videojuego</a>
+</div>
+</div>
