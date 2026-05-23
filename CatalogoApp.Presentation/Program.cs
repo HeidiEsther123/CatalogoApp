@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+
 // Ruta del JSON de Items
 var jsonPath = Path.Combine(
     builder.Environment.ContentRootPath,
@@ -33,7 +34,8 @@ builder.Services.AddSingleton<IReviewRepository>(
 // Registrar servicios
 builder.Services.AddScoped<ItemService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
-
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -44,6 +46,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseSession();
 app.UseAuthorization();
 app.MapStaticAssets();
 

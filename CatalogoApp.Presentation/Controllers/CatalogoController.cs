@@ -8,12 +8,12 @@ namespace CatalogoApp.Presentation.Controllers
     public class CatalogoController : Controller
     {
         private readonly ItemService _service;
-        private readonly IReviewService _reviewService; 
+        private readonly IReviewService _reviewService;
 
-        public CatalogoController(ItemService service, IReviewService reviewService) 
+        public CatalogoController(ItemService service, IReviewService reviewService)
         {
             _service = service;
-            _reviewService = reviewService; 
+            _reviewService = reviewService;
         }
 
         public IActionResult Index(string? genero)
@@ -36,7 +36,6 @@ namespace CatalogoApp.Presentation.Controllers
             ViewBag.Reviews = _reviewService.ObtenerReviewsPorItem(id);
             return View(item);
         }
-
         public IActionResult Agregar()
         {
             return View();
@@ -57,6 +56,9 @@ namespace CatalogoApp.Presentation.Controllers
 
         public IActionResult AgregarReview(int itemId)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("UsuarioLogueado")))
+                return RedirectToAction("Login", "Usuario");
+
             var review = new Review { ItemId = itemId };
             return View(review);
         }
@@ -64,6 +66,11 @@ namespace CatalogoApp.Presentation.Controllers
         [HttpPost]
         public IActionResult AgregarReview(Review review)
         {
+            var usuario = HttpContext.Session.GetString("UsuarioLogueado");
+            if (string.IsNullOrEmpty(usuario))
+                return RedirectToAction("Login", "Usuario");
+
+            review.Usuario = usuario;
             _reviewService.AgregarReview(review);
             return RedirectToAction("Detalle", new { id = review.ItemId });
         }

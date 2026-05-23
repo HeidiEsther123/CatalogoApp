@@ -47,7 +47,7 @@ namespace CatalogoApp.Presentation.Controllers
 
             if (usuarioValido != null)
             {
-
+                HttpContext.Session.SetString("UsuarioLogueado", usuarioValido.NombreUsuario); // ← agregar
                 return RedirectToAction("Index", "Catalogo");
             }
 
